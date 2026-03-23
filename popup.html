@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      width: 300px;
+      padding: 14px;
+      margin: 0;
+      font-size: 13px;
+    }
+    h3 { margin: 0 0 10px; font-size: 14px; }
+    label { display: block; margin-bottom: 4px; color: #444; }
+    input[type="password"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 13px;
+      font-family: monospace;
+    }
+    input[type="password"]:focus { outline: 2px solid #0969da; border-color: transparent; }
+    button {
+      margin-top: 8px;
+      padding: 6px 14px;
+      background: #2da44e;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    button:hover { background: #2c974b; }
+    .status { margin-top: 6px; font-size: 12px; min-height: 16px; }
+    .status.ok  { color: #2da44e; }
+    .status.err { color: #cf222e; }
+    p { color: #666; margin: 10px 0 0; line-height: 1.4; }
+    a { color: #0969da; }
+    hr { border: none; border-top: 1px solid #eee; margin: 14px 0; }
+    .section-label { font-weight: 600; font-size: 12px; color: #333; margin-bottom: 8px; }
+    .spawn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .spawn-grid label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0;
+      padding: 5px 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      color: #333;
+      transition: border-color .15s, background .15s;
+    }
+    .spawn-grid input[type="radio"] { margin: 0; cursor: pointer; accent-color: #0969da; }
+    .spawn-grid label:has(input:checked) { border-color: #0969da; background: #f0f7ff; }
+  </style>
+</head>
+<body>
+  <h3>CI Log Linker</h3>
+
+  <label for="token">GitHub Personal Access Token</label>
+  <input type="password" id="token" placeholder="ghp_…" autocomplete="off">
+  <button id="save">Save</button>
+  <div class="status" id="status"></div>
+  <p>
+    Needs <code>public_repo</code> scope for public repos,
+    or <code>repo</code> for private repos.<br>
+    <a href="https://github.com/settings/tokens/new?description=CI+Log+Linker&scopes=public_repo"
+       target="_blank">Create a token on GitHub ↗</a>
+  </p>
+
+  <hr>
+
+  <div class="section-label">Panel spawn position</div>
+  <div class="spawn-grid">
+    <label><input type="radio" name="spawn" value="top-left">     ↖ Top left</label>
+    <label><input type="radio" name="spawn" value="top-right">    ↗ Top right</label>
+    <label><input type="radio" name="spawn" value="bottom-left">  ↙ Bottom left</label>
+    <label><input type="radio" name="spawn" value="bottom-right"> ↘ Bottom right</label>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

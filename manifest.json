@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "GitHub CI Log Linker",
+  "description": "Links failed Behat/Cucumber scenarios in GitHub Actions job pages to the matching log line.",
+  "version": "1.3.0",
+  "permissions": [
+    "https://github.com/*",
+    "https://api.github.com/*",
+    "https://*.githubusercontent.com/*",
+    "storage"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "CI Log Linker – set GitHub token"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*/*/actions/runs/*",
+        "https://github.com/*/*/actions/runs/*/job/*",
+        "https://github.com/*/*/pull/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
